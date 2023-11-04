@@ -28,15 +28,20 @@ public class UserController {
         if(result != null){
             QueryWrapper<User> queryWrapper=new QueryWrapper<>();
             queryWrapper.eq("student_id", user.getStudentId());
-            return ResultUtil.success(userMapper.selectOne(queryWrapper));
+            return ResultUtil.success(userMapper.selectOne(queryWrapper)); //返回用户信息
         }else{
-            return ResultUtil.failure();
+            return ResultUtil.failure("登录失败，用户名或密码错误");
         }
     }
 
     @PostMapping("/register")
     public Result signUp(@RequestBody User user){
-        // TODO register code
-        return null;
+        User registeredUser = userService.Register(user.getUsername(), user.getStudentId(), user.getPhone(), user.getPassword(), user.getSchoolId(), user.getInvitedCode());
+        if (registeredUser != null) {
+            // TODO session
+            return ResultUtil.success(registeredUser);
+        } else {
+            return ResultUtil.failure("注册失败，用户名、学号、手机号等信息不合法");
+        }
     }
 }

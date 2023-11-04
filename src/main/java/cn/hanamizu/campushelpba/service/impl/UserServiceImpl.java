@@ -4,6 +4,7 @@ import cn.hanamizu.campushelpba.Mapper.UserMapper;
 import cn.hanamizu.campushelpba.entity.User;
 import cn.hanamizu.campushelpba.service.UserService;
 import cn.hanamizu.campushelpba.util.MD5Hash;
+import cn.hanamizu.campushelpba.util.checkInfo.UserInfoCheck;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     private final UserMapper userMapper;
     MD5Hash md5Hash = new MD5Hash();
+    UserInfoCheck userInfoCheck = new UserInfoCheck();
 
     public UserServiceImpl(UserMapper userMapper) {
         this.userMapper = userMapper;
@@ -30,9 +32,26 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     public User Register(String userName, Integer studentId, String phone, String password, Integer schoolId, String invitedCode) {
+        if (!userInfoCheck.isValidRegistration(userName, studentId, phone, password, schoolId)) {
+            return null; // 返回空表示注册失败
+        }
 
+        // 对密码进行加密
         password = encrypt(password);
-        return null;
+
+        // 创建一个新的用户对象
+        User newUser = new User();
+        newUser.setUsername(userName);
+        newUser.setStudentId(studentId);
+        newUser.setPhone(phone);
+        newUser.setPassword(password);
+        newUser.setSchoolId(schoolId);
+        newUser.setInvitedCode(invitedCode);
+
+        // 插入用户数据到数据库
+        userMapper.insert(newUser);
+
+        return newUser; // 返回新注册的用户信息
     }
 
     private String encrypt(String password) {
@@ -41,8 +60,4 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         //加密
         return md5Hash.hash(password);
     }
-
-
-
-
 }
