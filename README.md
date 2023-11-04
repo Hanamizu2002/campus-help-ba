@@ -42,5 +42,8 @@
   - school // 学校
   - task // 任务
   - post // 帖子
-  - 
+
+
+druid
+https://github.com/alibaba/druid/wiki/常见问题
 
