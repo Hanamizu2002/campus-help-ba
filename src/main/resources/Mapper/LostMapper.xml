@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ld.campus_help.mapper.LostMapper">
+
+    <resultMap id="BaseResultMap" type="com.ld.campus_help.entity.Lost">
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="userId" column="user_id" jdbcType="INTEGER"/>
+        <result property="title" column="title" jdbcType="VARCHAR"/>
+        <result property="description" column="description" jdbcType="VARCHAR"/>
+        <result property="addTime" column="add_time" jdbcType="DATE"/>
+        <result property="imgSrc" column="img_src" jdbcType="VARCHAR"/>
+        <result property="schoolId" column="school_id" jdbcType="INTEGER"/>
+        <result property="contactPhone" column="contact-phone" jdbcType="VARCHAR"/>
+        <result property="contactQq" column="contact-qq" jdbcType="VARCHAR"/>
+        <result property="contactWx" column="contact-wx" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="SMALLINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,user_id,title,
+        description,add_time,img_src,
+        school_id,contact-phone,contact-qq,
+        contact-wx,status
+    </sql>
+</mapper>

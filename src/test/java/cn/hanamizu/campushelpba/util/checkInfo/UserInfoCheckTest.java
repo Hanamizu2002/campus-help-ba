@@ -8,6 +8,6 @@ class UserInfoCheckTest {
     @Test
     void userInfoCheck() {
         UserInfoCheck userInfoCheck = new UserInfoCheck();
-        System.out.println(userInfoCheck.isValidRegistration("ma",1,"15603443334","123456",1));
+        System.out.println(userInfoCheck.isValidRegistration("ma","20140702152025","15603443334","123456",1));
     }
 }

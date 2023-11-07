@@ -1,7 +1,12 @@
 package cn.hanamizu.campushelpba.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
+
 import java.util.Date;
 
+@Data
+@TableName("serve")
 public class Serve {
     private Integer id;
     private Date serviceTime; //发布时间

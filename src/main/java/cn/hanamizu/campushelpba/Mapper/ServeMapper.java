@@ -1,0 +1,10 @@
+package cn.hanamizu.campushelpba.Mapper;
+
+import cn.hanamizu.campushelpba.entity.Serve;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Mapper;
+
+@Mapper
+public interface ServeMapper extends BaseMapper<Serve> {
+
+}

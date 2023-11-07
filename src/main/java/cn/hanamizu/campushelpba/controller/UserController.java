@@ -40,7 +40,7 @@ public class UserController {
         if (registeredUser != null) {
             // TODO 返回user表对应的所有信息
             // TODO session
-            return ResultUtil.success(registeredUser);
+            return ResultUtil.success("注册成功");
         } else {
             return ResultUtil.failure("注册失败，用户名、学号、手机号等信息不合法");
         }
@@ -74,4 +74,6 @@ public class UserController {
             return ResultUtil.failure("获取失败");
         }
     }
+
+    //TODO 手机号登录
 }
