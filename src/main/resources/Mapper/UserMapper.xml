@@ -7,16 +7,17 @@
     <resultMap id="BaseResultMap" type="com.ld.campus_help.entity.User">
         <id property="id" column="id" jdbcType="INTEGER"/>
         <result property="username" column="username" jdbcType="VARCHAR"/>
-        <result property="StudentId" column="StudentId" jdbcType="INTEGER"/>
+        <result property="StudentId" column="StudentId" jdbcType="VARCHAR"/>
         <result property="password" column="password" jdbcType="VARCHAR"/>
         <result property="schoolId" column="schoolId" jdbcType="INTEGER"/>
         <result property="phone" column="phone" jdbcType="VARCHAR"/>
         <result property="inviteCode" column="inviteCode" jdbcType="VARCHAR"/>
         <result property="invitedCode" column="invitedCode" jdbcType="VARCHAR"/>
         <result property="headImg" column="headImg" jdbcType="VARCHAR"/>
+        <result property="email" column="email" javaType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id, username, StudentId, password, schoolId, phone, inviteCode, invitedCode, headImg
+        id, username, StudentId, password, schoolId, phone, inviteCode, invitedCode, headImg, email
     </sql>
 </mapper>

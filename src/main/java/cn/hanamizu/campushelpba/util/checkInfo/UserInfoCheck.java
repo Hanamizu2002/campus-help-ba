@@ -1,14 +1,15 @@
 package cn.hanamizu.campushelpba.util.checkInfo;
 
 public class UserInfoCheck {
-    public boolean isValidRegistration(String userName, Integer studentId, String phone, String password, Integer schoolId) {
+    public boolean isValidRegistration(String userName, String studentId, String phone, String password, Integer schoolId) {
         // 检查用户名是否为空
         if (userName == null || userName.trim().isEmpty()) {
             return false;
         }
 
         // 检查学号是否合法
-        if (studentId == null || studentId < 0) {
+        if (studentId == null || studentId.trim().isEmpty()) {
+            // TODO 正则
             return false;
         }
 

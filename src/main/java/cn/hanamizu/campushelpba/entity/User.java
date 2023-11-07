@@ -9,7 +9,7 @@ public class User {
 
     private String username;
 
-    private Integer StudentId;
+    private String StudentId;
 
     private String password;
 
@@ -22,4 +22,7 @@ public class User {
     private String invitedCode;
 
     private String headImg;
+
+    private String email;
+
 }

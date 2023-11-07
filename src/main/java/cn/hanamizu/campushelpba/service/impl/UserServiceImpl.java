@@ -21,7 +21,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
-    public User login(Integer studentId, String password, Integer schoolId) {
+    public User login(String studentId, String password, Integer schoolId) {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("student_id", studentId);
         password = encrypt(password);
@@ -31,7 +31,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
-    public User Register(String userName, Integer studentId, String phone, String password, Integer schoolId, String invitedCode) {
+    public User Register(String userName, String studentId, String phone, String password, Integer schoolId, String invitedCode) {
         if (!userInfoCheck.isValidRegistration(userName, studentId, phone, password, schoolId)) {
             return null; // 返回空表示注册失败
         }
@@ -52,6 +52,34 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         userMapper.insert(newUser);
 
         return newUser; // 返回新注册的用户信息
+    }
+
+    @Override
+    public User updateHeadImg(String studentId, String headImg) {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("student_id", studentId);
+        User existingUser = userMapper.selectOne(queryWrapper);
+
+        if (existingUser == null) {
+            return null;
+        }
+
+        existingUser.setHeadImg(headImg);
+
+        userMapper.updateById(existingUser);
+
+        return existingUser;
+    }
+
+    @Override
+    public int getTotalUserCount() {
+        //TODO 获取学生人数
+        return 0;
+    }
+
+    @Override
+    public User update(String studentId, String username, String phone, String headImg) {
+        return null;
     }
 
     private String encrypt(String password) {

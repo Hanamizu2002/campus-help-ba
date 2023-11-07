@@ -23,25 +23,55 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public Result signIn(@RequestBody User user){
-        User result = userService.login(user.getStudentId(),user.getPassword(), user.getSchoolId());
-        if(result != null){
-            QueryWrapper<User> queryWrapper=new QueryWrapper<>();
+    public Result signIn(@RequestBody User user) {
+        User result = userService.login(user.getStudentId(), user.getPassword(), user.getSchoolId());
+        if (result != null) {
+            QueryWrapper<User> queryWrapper = new QueryWrapper<>();
             queryWrapper.eq("student_id", user.getStudentId());
             return ResultUtil.success(userMapper.selectOne(queryWrapper)); //返回用户信息
-        }else{
+        } else {
             return ResultUtil.failure("登录失败，用户名或密码错误");
         }
     }
 
     @PostMapping("/register")
-    public Result signUp(@RequestBody User user){
+    public Result signUp(@RequestBody User user) {
         User registeredUser = userService.Register(user.getUsername(), user.getStudentId(), user.getPhone(), user.getPassword(), user.getSchoolId(), user.getInvitedCode());
         if (registeredUser != null) {
+            // TODO 返回user表对应的所有信息
             // TODO session
             return ResultUtil.success(registeredUser);
         } else {
             return ResultUtil.failure("注册失败，用户名、学号、手机号等信息不合法");
+        }
+    }
+    // TODO 忘记密码
+    @PostMapping("/updateHeadImg")
+    public Result updateHeadImg(@RequestBody User user) {
+        User result = userService.updateHeadImg(user.getStudentId(), user.getHeadImg());
+        if (result != null) {
+            return ResultUtil.success(result);
+        } else {
+            return ResultUtil.failure("更新失败");
+        }
+    }
+
+    @PostMapping("/update")
+    public Result update(@RequestBody User user) {
+        User result = userService.update(user.getStudentId(), user.getUsername(), user.getPhone(), user.getEmail());
+        if (result != null) {
+            return ResultUtil.success(result);
+        } else {
+            return ResultUtil.failure("更新失败");
+        }
+    }
+    @PostMapping("/getTotalUserCount")
+    public Result getTotalUserCount() {
+        int result = userService.getTotalUserCount();
+        if (result != 0) {
+            return ResultUtil.success(result);
+        } else {
+            return ResultUtil.failure("获取失败");
         }
     }
 }
